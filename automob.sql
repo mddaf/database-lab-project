@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 19, 2024 at 08:04 PM
+-- Generation Time: Sep 20, 2024 at 10:58 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -34,14 +34,6 @@ CREATE TABLE `cart_items` (
   `AddedAt` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `cart_items`
---
-
-INSERT INTO `cart_items` (`Username`, `ProductID`, `Quantity`, `AddedAt`) VALUES
-('', 20, 1, '2024-09-15 05:30:46'),
-('', 16, 1, '2024-09-15 05:31:38');
-
 -- --------------------------------------------------------
 
 --
@@ -64,8 +56,7 @@ CREATE TABLE `customer` (
 
 INSERT INTO `customer` (`Name`, `Username`, `Email`, `Phone`, `Address`, `Gender`, `Password`) VALUES
 ('Fayed', 'daf', 'alfayed348@gmail.com', '123', 'badda', 'Male', '456789'),
-('emon', 'sar', 'ds@gmail.com', '123', 'badda', 'Male', '456789'),
-('sasuke', 'saringan', 'crow@gmail.com', '41489', 'leaf', 'Male', '123456');
+('emon', 'sar', 'ds@gmail.com', '123', 'badda', 'Male', '456789');
 
 -- --------------------------------------------------------
 
@@ -86,15 +77,9 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`OrderID`, `Username`, `OrderDate`, `ShippingAddress`, `PaymentType`) VALUES
-(34, 'sar', '2024-09-14', 'd', 'Cash On Delivery'),
-(35, 'sar', '2024-09-14', 'h', 'Mobile Banking'),
-(36, 'daf', '2024-09-15', 'h', 'Cash On Delivery'),
-(37, 'daf', '2024-09-15', 'tfy', 'Mobile Banking'),
-(38, 'daf', '2024-09-15', 'Badda', 'Mobile Banking'),
-(39, 'daf', '2024-09-15', 'Middle Badda', 'Cash On Delivery'),
-(40, 'daf', '2024-09-15', 'yhrt', 'Mobile Banking'),
-(41, 'daf', '2024-09-15', 'retger', 'Cash On Delivery'),
-(42, 'daf', '2024-09-16', 'fgb', 'Cash On Delivery');
+(44, 'sar', '2024-09-20', 'mvn', 'Mobile Banking'),
+(45, 'daf', '2024-09-20', 'ngff', 'Cash On Delivery'),
+(46, 'daf', '2024-09-20', 'cgreg', 'Cash On Delivery');
 
 -- --------------------------------------------------------
 
@@ -114,16 +99,10 @@ CREATE TABLE `order_details` (
 --
 
 INSERT INTO `order_details` (`DetailsID`, `OrderID`, `Quantity`, `ProductID`) VALUES
-(66, 34, 4, 18),
-(67, 35, 3, 20),
-(68, 36, 112, 18),
-(69, 37, 2, 18),
-(70, 38, 1, 16),
-(71, 38, 10003, 18),
-(72, 39, 1078, 16),
-(73, 40, 1, 18),
-(74, 41, 10002, 18),
-(75, 42, 1, 20);
+(77, 44, 700, 20),
+(78, 45, 100, 18),
+(79, 45, 5, 20),
+(80, 46, 1800, 18);
 
 -- --------------------------------------------------------
 
@@ -144,15 +123,9 @@ CREATE TABLE `payment` (
 --
 
 INSERT INTO `payment` (`PaymentID`, `OrderID`, `AccountNumber`, `TransactionID`, `BankingOption`) VALUES
-(22, 34, '', '', 'Bkash'),
-(23, 35, '3', 'fgh', 'Bkash'),
-(24, 36, '', '', 'Bkash'),
-(25, 37, 'gf', 'g', 'Bkash'),
-(26, 38, '46514651465', 'FTfg54fgvYu', 'Bkash'),
-(27, 39, '', '', 'Bkash'),
-(28, 40, '658458', 'rgrt', 'Nagad'),
-(29, 41, '', '', 'Bkash'),
-(30, 42, NULL, NULL, NULL);
+(32, 44, 'bvn', 'det34t', 'Bkash'),
+(33, 45, NULL, NULL, NULL),
+(34, 46, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -176,9 +149,8 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`ProductID`, `Seller`, `ProductName`, `Category`, `ProductDetails`, `Price`, `Availability`, `ProductImage`) VALUES
-(16, 'daf', 'Iphone 16', 'Mobile', 'ef', '89', 'NO', 'uploads/66e611a179318.jpeg'),
 (18, 'daf', 'Tire', 'Bike Parts', 'Michelin Palsur Tire', '10', 'YES', 'uploads/66e5f86057797.jpeg'),
-(20, 'sar', 'Iphone 16', 'Mobile', 'vhyu tfgyuyugyub ', '1000', 'YES', 'uploads/66dd4f8830afe.jpeg');
+(20, 'sar', 'Iphone 16', 'rfv', 'vhyu tfgyuyugyub ', '1000', 'YES', 'uploads/66dd4f8830afe.jpeg');
 
 -- --------------------------------------------------------
 
@@ -202,8 +174,7 @@ CREATE TABLE `seller` (
 
 INSERT INTO `seller` (`Name`, `Username`, `Email`, `Phone`, `Address`, `Gender`, `Password`) VALUES
 ('Fayed', 'daf', 'alfayed348@gmail.com', '123', 'badda', 'Male', '456789'),
-('emon', 'sar', 'ds@gmail.com', '123', 'badda', 'Male', '456789'),
-('naruto', 'shadow', 'clone@gmail.com', '41489', 'leaf', 'Male', '123456');
+('emon', 'sar', 'ds@gmail.com', '123', 'badda', 'Male', '456789');
 
 --
 -- Indexes for dumped tables
@@ -213,7 +184,8 @@ INSERT INTO `seller` (`Name`, `Username`, `Email`, `Phone`, `Address`, `Gender`,
 -- Indexes for table `cart_items`
 --
 ALTER TABLE `cart_items`
-  ADD KEY `Username` (`Username`);
+  ADD KEY `Username` (`Username`),
+  ADD KEY `ProductID` (`ProductID`);
 
 --
 -- Indexes for table `customer`
@@ -225,7 +197,8 @@ ALTER TABLE `customer`
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`OrderID`);
+  ADD PRIMARY KEY (`OrderID`),
+  ADD KEY `Username` (`Username`);
 
 --
 -- Indexes for table `order_details`
@@ -262,19 +235,19 @@ ALTER TABLE `seller`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `DetailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `DetailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `PaymentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `PaymentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `product`
