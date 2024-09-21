@@ -41,17 +41,12 @@
             font-size: 17px;
         }
 
-
         .navbar a.logo {
             float: left;
             font-size: 24px;
             font-weight: bold;
             color: #f2f2f2;
         }
-
-
-
-
 
         h2 {
             text-align: center;
@@ -135,7 +130,7 @@
 </head>
 <body>
     <div class="navbar">
-        <div> <a href="seller_home.php" class="logo">AutoMob</a></div>
+        <div><a href="seller_home.php" class="logo">AutoMob</a></div>
         <div>
             <a href="logout.php">Log Out</a>
             <a href="">Account</a>
@@ -143,6 +138,16 @@
         </div>
     </div>
     <h2>Add New Product</h2>
+
+    <?php
+    // Include database connection
+    include 'db_connection.php';
+
+    // Fetch all categories for the dropdown
+    $categoryQuery = "SELECT DISTINCT Category FROM product";
+    $categoryResult = $conn->query($categoryQuery);
+    ?>
+
     <form action="add_product_handle.php" method="POST" enctype="multipart/form-data">
         <label for="product_name">Product Name:</label>
         <input type="text" name="product_name" required><br><br>
@@ -150,15 +155,16 @@
         <label for="category">Category:</label>
         <select name="category" onchange="toggleCustomCategory(this)" required>
             <option value="">Select Category</option>
-            <option value="electronics">Electronics</option>
-            <option value="fashion">Fashion</option>
-            <option value="home">Home</option>
-            <!-- Add more predefined categories as needed -->
+            <?php while ($catRow = $categoryResult->fetch_assoc()): ?>
+                <option value="<?php echo htmlspecialchars($catRow['Category']); ?>">
+                    <?php echo htmlspecialchars($catRow['Category']); ?>
+                </option>
+            <?php endwhile; ?>
             <option value="other">Other</option>
         </select><br><br>
 
         <!-- Input field for custom category, initially hidden -->
-        <div id="custom-category" style="display: none;">
+        <div id="custom-category">
             <label for="custom_category">Custom Category:</label>
             <input type="text" name="custom_category"><br><br>
         </div>
@@ -175,5 +181,9 @@
         <button type="submit">Add Product</button>
         <button type="reset">Reset</button>
     </form>
+
+    <?php
+    $conn->close();
+    ?>
 </body>
 </html>
