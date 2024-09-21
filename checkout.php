@@ -16,7 +16,7 @@ $result = $conn->query($sql);
 
 if ($result->num_rows == 0) {
     echo "<h2>Your Cart is Empty</h2>";
-    echo "<a href='customer_home.php'>Continue Shopping</a>";
+    echo "<a href='index.php'>Continue Shopping</a>";
     exit();
 }
 
@@ -110,15 +110,15 @@ if ($conn->query($orderSql) === TRUE) {
                   a {
                       display: inline-block;
                       text-decoration: none;
-                      background-color: #007bff;
-                      color: white;
+                      color: #45a049;
+                      border: 1px solid #45a049;
                       padding: 10px 20px;
-                      border-radius: 4px;
-                      font-size: 16px;
-                      transition: background-color 0.3s ease;
+                      border-radius: 5px;
+                      transition: background-color 0.3s, color ease;
                   }
                   a:hover {
-                      background-color: #0056b3;
+                    background-color: #45a049;
+                    color: #ffffff;
                   }
               </style>
           </head>

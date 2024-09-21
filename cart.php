@@ -1,3 +1,19 @@
+<?php
+session_start(); // Start the session at the very top
+include 'db_connection.php'; // Include your database connection file
+
+if (!isset($_SESSION['username'])) {
+    echo "You must be logged in to view your orders.";
+    exit();
+}
+
+$username = $_SESSION['username']; // Get the logged-in username
+
+// Query to fetch cart items
+$detailsSql = "SELECT * FROM cart_items WHERE Username = '$username'";
+$detailsResult = $conn->query($detailsSql);
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +31,7 @@
         .navbar {
             background-color: #333;
             color: white;
-            padding: 15px 20px;
+            padding: 20px 40px;
             text-align: right;
             position: sticky;
             top: 0;
@@ -39,8 +55,6 @@
             color: white;
             text-decoration: none;
         }
-
-
 
         /* Main Content */
         .main {
@@ -78,39 +92,35 @@
             background-color: #f1f1f1;
         }
 
-        
         /* Buttons and Links */
         .action-links a, .continue-shopping, .checkout-button {
             display: inline-block;
             padding: 10px 15px;
-            border:none;
+            border: none;
             color: white;
             text-decoration: none;
             border-radius: 5px;
             margin: 5px;
         }
-        
 
-        .continue-shopping, .checkout-button{
+        .continue-shopping, .checkout-button {
             background-color: #4CAF50;
         }
         .continue-shopping:hover, .checkout-button:hover {
             background-color: #45a049;
         }
 
-        .action-links a:hover{
+        .action-links a:hover {
             background-color: #c82333;
         }
 
         .remove-link {
             background-color: #dc3545;
         }
-   
 
         /* Form Styles */
         form {
             background-color: white;
-            /* padding: 20px; */
             border-radius: 5px;
         }
         form h3 {
@@ -141,14 +151,38 @@
             display: none;
         }
 
-        /* Continue Shopping Link */
-        .continue-shopping {
-            display: inline-block;
-            margin-bottom: 20px;
-            background-color: #007bff;
+        .no-orders-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50vh; /* Adjusted for the navbar */
         }
-        .continue-shopping:hover {
-            background-color: #0056b3;
+
+        .no-orders {
+            text-align: center;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+        }
+
+        .no-orders a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #45a049;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .no-orders a:hover {
+            background-color: #3a8b41;
+            transform: translateY(-2px);
         }
     </style>
 </head>
@@ -156,7 +190,7 @@
 
     <!-- Navigation Bar -->
     <div class="navbar">
-        <div><a href="customer_home.php">AutoMob</a></div>
+        <div><a href="index.php">AutoMob</a></div>
         <div><a href="#">Account</a></div>
         <div><a href="my_orders.php">My Orders</a></div>
         <div><a href="logout.php">Log out</a></div>
@@ -164,19 +198,6 @@
 
     <div class="main">
         <?php
-        session_start();
-        include 'db_connection.php'; // Replace with your actual database connection file
-        
-        if (!isset($_SESSION['username'])) {
-            echo "You must be logged in to view your orders.";
-            exit();
-        }
-
-        $username = $_SESSION['username']; // Assuming the user is logged in
-
-        $detailsSql = "SELECT * FROM cart_items WHERE Username = '$username'";
-        $detailsResult = $conn->query($detailsSql);
-
         if ($detailsResult->num_rows > 0) {
             echo "<h2>Your Cart</h2>";
             echo "<table>
@@ -213,7 +234,7 @@
                     <td></td>
                 </tr>";
             echo "</table>";
-            echo "<a href='customer_home.php' class='continue-shopping'>Continue Shopping</a>";
+            echo "<a href='index.php' class='continue-shopping'>Continue Shopping</a>";
 
             // Checkout form
             echo "<form method='POST' action='checkout.php'>
@@ -247,8 +268,12 @@
                     <button type='submit' class='checkout-button'>Checkout</button>
                   </form>";
         } else {
-            echo "<h2>Your Cart is Empty</h2>";
-            echo "<a href='customer_home.php' class='continue-shopping'>Continue Shopping</a>";
+            echo "<div class='no-orders-box'>
+                    <div class='no-orders'>
+                        <h2>Your Cart is Empty</h2>
+                        <a href='index.php'>Continue Shopping</a>
+                    </div>
+                  </div>";
         }
 
         $conn->close();

@@ -34,16 +34,18 @@
             border-radius: 4px;
         }
         button {
+            width: 100%;
             padding: 10px;
-            background-color: #007bff;
-            color: white;
+            background-color: #4CAF50;
             border: none;
-            border-radius: 4px;
+            color: white;
+            border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
+            margin-top: 10px;
         }
         button:hover {
-            background-color: #0056b3;
+            background-color: #45a049;
         }
         .form-group {
             margin-bottom: 15px;
@@ -59,12 +61,12 @@
             margin-top: 20px;
         }
         .redirect-link a {
-            color: #007bff;
+            display: inline;
+            margin-top: 15px;
+            color: #4CAF50;
             text-decoration: none;
         }
-        .redirect-link a:hover {
-            text-decoration: underline;
-        }
+
     </style>
 </head>
 <body>
@@ -122,7 +124,7 @@
         </form>
 
         <div class="redirect-link">
-            <p>Already have an account? <a href="index.php">Login here</a></p>
+            <p>Already have an account? <a href="login.php">Login here</a></p>
         </div>
     </div>
 </body>

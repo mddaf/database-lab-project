@@ -22,7 +22,7 @@ if ($userType == 'customer') {
 if ($conn->query($sql) === TRUE) {
     $_SESSION['username'] = $username;
     $_SESSION['user_type'] = $userType;
-    header("Location: index.php"); // Redirect to home page or dashboard
+    header("Location: login.php"); // Redirect to home page or dashboard
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

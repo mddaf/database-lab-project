@@ -22,7 +22,7 @@ if ($result->num_rows > 0) {
 
     // Redirect based on user type
     if ($userType == 'customer') {
-        header("Location: customer_home.php"); // Redirect to customer home page
+        header("Location: index.php"); // Redirect to customer home page
     } else {
         header("Location: seller_home.php"); // Redirect to seller home page
     }
