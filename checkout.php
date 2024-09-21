@@ -28,9 +28,8 @@ $accountNumber = isset($_POST['account_number']) ? $_POST['account_number'] : nu
 $transactionId = isset($_POST['transaction_id']) ? $_POST['transaction_id'] : null;
 
 // Insert order data into the orders table
-$orderDate = date('Y-m-d'); // Current date
 $orderSql = "INSERT INTO orders (Username, OrderDate, ShippingAddress, PaymentType) 
-             VALUES ('$user', '$orderDate', '$shippingAddress', '$paymentType')";
+             VALUES ('$user', NOW(), '$shippingAddress', '$paymentType')";
 
 if ($conn->query($orderSql) === TRUE) {
     $orderID = $conn->insert_id; // Get the last inserted OrderID

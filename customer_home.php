@@ -32,7 +32,7 @@ if ($category != '') {
 
 // Apply sorting
 if ($sort == 'price-asc') {
-    $sql .= " ORDER BY Price ASC";
+    $sql .= " ORDER BY Availability DESC, Price ASC";
 } elseif ($sort == 'price-desc') {
     $sql .= " ORDER BY Availability DESC, Price DESC";
 } elseif ($sort == 'in-stock') {

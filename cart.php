@@ -201,7 +201,7 @@
                     echo "<tr>
                             <td>{$productName}</td>
                             <td>{$quantity}</td>
-                            <td>\${$itemTotalPrice}</td>
+                            <td>৳ {$itemTotalPrice}/-</td>
                             <td class='action-links'><a href='remove_from_cart.php?product_id={$productID}' class='remove-link'>Remove</a></td>
                         </tr>";
                 }
@@ -209,7 +209,7 @@
 
             echo "<tr>
                     <td colspan='2'><strong>Total</strong></td>
-                    <td><strong>\${$totalPrice}</strong></td>
+                    <td><strong>৳ {$totalPrice}/-</strong></td>
                     <td></td>
                 </tr>";
             echo "</table>";

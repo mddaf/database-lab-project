@@ -230,14 +230,14 @@ if ($orderResult->num_rows > 0) {
                     echo "<tr>
                             <td>$productName</td>
                             <td>$quantity</td>
-                            <td>$$itemTotalPrice</td>
+                            <td>৳ {$itemTotalPrice}/-</td>
                         </tr>";
                 }
             }
 
             echo "<tr>
                     <td colspan='2'>Total</td>
-                    <td>\${$totalPrice}</td>
+                    <td>৳ {$totalPrice}/-</td>
                 </tr>";
             echo "</table>";
         } else {
