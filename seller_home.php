@@ -275,10 +275,10 @@ $categoryResult = $conn->query($categoryQuery);
                     <img src="<?php echo $row['ProductImage']; ?>" alt="<?php echo $row['ProductName']; ?>">
 
                     <h3><?php echo $row['ProductName']; ?></h3>
-                    <p>Details: <?php echo $row['ProductDetails']; ?></p>
-                    <p>Current Price: ৳ <?php echo $row['Price']; ?></p>
-                    <p>Current Availability: <?php echo $row['Availability'] == 'YES' ? 'Yes' : 'No'; ?></p>
-                    <p>Current Category: <?php echo htmlspecialchars($row['Category']); ?></p>
+                    <p><?php echo $row['ProductDetails']; ?></p>
+                    <p>৳ <?php echo $row['Price']; ?></p>
+                    <p>Availability: <?php echo $row['Availability'] == 'YES' ? 'Yes' : 'No'; ?></p>
+                    <p>Category: <?php echo htmlspecialchars($row['Category']); ?></p>
 
                     <div class="btn">
                         <!-- Edit Button -->
